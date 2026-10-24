@@ -1,26 +1,39 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-ink: #121212;
+  --color-asphalt: #1e1e1e;
+  --color-pavement: #d1d1d1;
+  --color-trail: #45db7d;
+  --color-lime: #def54f;
+  --color-sky: #6ac9ff;
+  --color-graphite: #333333;
+  --color-tangerine: #fa7328;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--color-ink);
+  color: #ffffff;
+  /* clip, not hidden: hidden would make <body> a scroll container and break position: sticky. */
+  overflow-x: clip;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Elements revealed by the intro timeline start hidden so the server-rendered
+   HTML doesn't flash before GSAP takes over. GSAP's autoAlpha clears this. */
+[data-intro] {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-intro] {
+    visibility: visible;
+  }
 }
